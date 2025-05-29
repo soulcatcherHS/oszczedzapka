@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/oszczedzapka
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    depends_on:
+      - mongodb
+    networks:
+      - oszczedzapka-network
+
+  mongodb:
+    image: mongo:7.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=oszczedzapka
+    networks:
+      - oszczedzapka-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  oszczedzapka-network:
+    driver: bridge

@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Recharts tooltip custom styling */
+.recharts-tooltip-wrapper {
+  @apply !outline-none;
+}
+
+.recharts-default-tooltip {
+  @apply !bg-white dark:!bg-gray-800 !border !border-gray-200 dark:!border-gray-700 !rounded-lg shadow-lg;
+}
+
+.recharts-tooltip-label {
+  @apply !text-gray-900 dark:!text-gray-100 font-medium;
+}
+
+.recharts-tooltip-item {
+  @apply !text-gray-700 dark:!text-gray-300;
+}
+
+/* Animation classes */
+@keyframes enter {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes leave {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.animate-enter {
+  animation: enter 0.2s ease-out;
+}
+
+.animate-leave {
+  animation: leave 0.15s ease-in forwards;
+}
